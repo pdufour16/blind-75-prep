@@ -11,9 +11,16 @@ class Node<Element> {
     var next: Node?
     var value: Element
     
-    init(value: Element) {
+    init(_ value: Element) {
         self.value = value
     }
-    
-    
+}
+
+extension Node: CustomStringConvertible {
+    public var description: String {
+        guard let next = next else {
+            return "\(value)"
+        }
+        return "\(value) -> \(String(describing: next) )"
+    }
 }

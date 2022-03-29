@@ -7,9 +7,9 @@
 
 import Foundation
 
-class LinkedList<Element> {
-    var head: Node<Element>?
-    var tail: Node<Element>?
+struct LinkedList<Value> {
+    var head: Node<Value>?
+    var tail: Node<Value>?
     
     var isEmpty: Bool {
         return head == nil
@@ -18,29 +18,65 @@ class LinkedList<Element> {
 }
 
 extension LinkedList {
-    func push(_ element: Element) {
+    public mutating func push(_ val: Value) {
+        let node = Node(val)
+        node.next = head
+        self.head = node
+        if tail == nil {
+            tail = head
+        }
+    }
+    
+    public mutating func append(_ val: Value) {
+        
+        guard !isEmpty else {
+            push(val)
+            return
+        }
+        
+        let node = Node(val)
+        
+        tail?.next = node
+        tail = tail?.next
+    }
+    
+    mutating func insert(val: Value, after index: Int) {
+        let nodeAtIndex = node(at: index)
+        
+        guard nodeAtIndex !== tail else {
+            append(val)
+            return
+        }
+        
+        let newNode = Node(val)
+        newNode.next = nodeAtIndex?.next
+        nodeAtIndex?.next = newNode
+        
         
     }
     
-    func append(_ element: Element) {
+    private func node(at index: Int) -> Node<Value>? {
+        var currentNode = head
+        var currentIndex = 0
         
-    }
-    
-    func insert(after element: Element) {
-        
+        while currentIndex < index && currentNode != nil {
+            currentNode = currentNode?.next
+            currentIndex += 1
+        }
+        return currentNode
     }
 }
 
 extension LinkedList {
-    func pop() -> Element? {
+    func pop() -> Value? {
         return nil
     }
     
-    func removeLast() -> Element? {
+    func removeLast() -> Value? {
         return nil
     }
     
-    func remove(at index: Int) -> Element? {
+    func remove(at index: Int) -> Value? {
         return nil
     }
 }
