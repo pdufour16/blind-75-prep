@@ -33,14 +33,14 @@ extension LinkedList {
 
 extension LinkedList {
     func pop() -> Element? {
-        
+        return nil
     }
     
     func removeLast() -> Element? {
-        
+        return nil
     }
     
-    func remove(at index: Integer) -> Element? {
-        
+    func remove(at index: Int) -> Element? {
+        return nil
     }
 }
